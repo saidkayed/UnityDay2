@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlaneScrip : MonoBehaviour
 {
@@ -13,10 +14,16 @@ public class PlaneScrip : MonoBehaviour
     {
         Count = 0;
     }
-   
+
+    private void Update()
+    {
+        Points.transform.DOScale(2, 50 * Time.deltaTime);
+        Points.DOColor(Color.red, 50 * Time.deltaTime);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-
+        
         if (other.gameObject.CompareTag("Points"))
         {
 
@@ -26,16 +33,21 @@ public class PlaneScrip : MonoBehaviour
 
             Count++;
             Points.text = "Points " + Count.ToString();
-
-
            
+            Points.DOColor(Color.yellow,0);
+
+            Points.transform.DOScale(3, 0);
+          
+
+
         }
         else
         {
-            print("none");
+            
         }
-
+        print("ikke noget");
 
 
     }
+
 }
